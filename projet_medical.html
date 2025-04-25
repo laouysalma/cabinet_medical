@@ -447,24 +447,24 @@
           <form method="post" action ="rdv.php">
             <div class="mb-4">
               <label for="fullName" class="form-label">Nom complet</label>
-              <input type="text" class="form-control" id="fullName" placeholder="Votre nom complet">
+              <input type="text" class="form-control" name="fullName" id="fullName" placeholder="Votre nom complet">
             </div>
             <div class="mb-4">
               <label for="email" class="form-label">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Votre adresse email">
+              <input type="email" class="form-control" id="email" name ="email" placeholder="Votre adresse email">
             </div>
             <div class="mb-4">
               <label for="phone" class="form-label">Téléphone</label>
-              <input type="tel" class="form-control" id="phone" placeholder="Votre numéro de téléphone">
+              <input type="tel" class="form-control" id="phone" name="phone"  placeholder="Votre numéro de téléphone">
             </div>
             <div class="row g-3 mb-4">
               <div class="col-md-6">
                 <label for="date" class="form-label">Date</label>
-                <input type="date" class="form-control" id="date">
+                <input type="date" class="form-control" id="date" name ="date">
               </div>
               <div class="col-md-6">
                 <label for="time" class="form-label">Heure</label>
-                <select class="form-select" id="time">
+                <select class="form-select" id="time" name="time">
                   <option>Choisissez une heure</option>
                   <option>09:00</option>
                   <option>10:00</option>
@@ -477,7 +477,7 @@
             </div>
             <div class="mb-4">
               <label for="doctor" class="form-label">Médecin</label>
-              <select class="form-select" id="doctor">
+              <select class="form-select" id="doctor"name="doctor">
                 <option>Choisissez un médecin</option>
                 <option>Dr Ahmed Karim (Cardiologue)</option>
                 <option>Dr Nadia Ben Salah (Pédiatre)</option>
