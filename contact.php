@@ -9,8 +9,8 @@ if ($conn->connect_error) {
     die("Connexion échouée : " . $conn->connect_error);
 }
 
-$name = $_POST['contactName'];
-$email = $_POST['contactEmail'];
+$name = $_POST['name'];
+$email = $_POST['email'];
 $subject = $_POST['subject'];
 $message = $_POST['message'];
 
