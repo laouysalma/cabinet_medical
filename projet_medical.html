@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cabinet Médical MediCab+ - Soins d'excellence</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <style>
+    :root {
+      --primary-color: #2c7be5;
+      --primary-light: #e8f2fe;
+      --secondary-color: #6c757d;
+      --accent-color: #00d97e;
+      --dark-color: #1a2a3a;
+      --light-color: #f8f9fa;
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+    
+    body { 
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #495057;
+      overflow-x: hidden;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, rgba(26, 42, 58, 0.85) 0%, rgba(44, 123, 229, 0.8) 100%), 
+                  url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center center/cover no-repeat;
+      color: white;
+      padding: 200px 0 180px;
+      position: relative;
+      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+    }
+    
+    .section-title { 
+      position: relative;
+      text-align: center; 
+      margin-bottom: 60px;
+      color: var(--dark-color);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--accent-color);
+      margin: 20px auto 15px;
+      border-radius: 2px;
+    }
+    
+    .service-box, .event-card { 
+      transition: var(--transition);
+      border-radius: 12px;
+      overflow: hidden;
+      height: 100%;
+      border: none;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .service-box:before, .event-card:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      opacity: 0;
+      z-index: -1;
+      transition: var(--transition);
+    }
+    
+    .service-box:hover, .event-card:hover { 
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
+      color: white;
+    }
+    
+    .service-box:hover:before, .event-card:hover:before {
+      opacity: 1;
+    }
+    
+    .service-box:hover .icon-wrapper i,
+    .service-box:hover .text-muted,
+    .service-box:hover a {
+      color: white !important;
+    }
+    
+    .testimonial {
+      background: white;
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      position: relative;
+    }
+    
+    .testimonial:after {
+      content: '\201D';
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 80px;
+      color: var(--primary-light);
+      font-family: serif;
+      line-height: 1;
+    }
+    
+    .resource-icon { 
+      width: 70px; 
+      height: 70px;
+      margin-bottom: 20px;
+      object-fit: contain;
+    }
+    
+    footer { 
+      background: var(--dark-color); 
+      padding: 80px 0 0;
+      color: white;
+      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+    }
+    
+    .navbar {
+      transition: var(--transition);
+      padding: 15px 0;
+    }
+    
+    .navbar.scrolled {
+      background-color: white !important;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+    }
+    
+    .navbar.scrolled .nav-link {
+      color: var(--dark-color) !important;
+    }
+    
+    .navbar.scrolled .navbar-brand {
+      color: var(--primary-color) !important;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      padding: 12px 28px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: var(--transition);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3);
+    }
+    
+    .btn-outline-primary {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      padding: 12px 28px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3);
+    }
+    
+    .doctor-card {
+      transition: var(--transition);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .doctor-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .doctor-img {
+      height: 200px;
+      object-fit: cover;
+      width: 100%;
+      transition: var(--transition);
+    }
+    
+    .doctor-card:hover .doctor-img {
+      transform: scale(1.05);
+    }
+    
+    .form-control, .form-select {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      transition: var(--transition);
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.25rem rgba(44, 123, 229, 0.15);
+    }
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 5px;
+      transition: var(--transition);
+    }
+    
+    .social-icon:hover {
+      background: var(--accent-color);
+      transform: translateY(-5px);
+    }
+    
+    .appointment-form {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+    
+    .appointment-form-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .floating-label {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .floating-label label {
+      position: absolute;
+      top: 12px;
+      left: 15px;
+      color: var(--secondary-color);
+      transition: var(--transition);
+      pointer-events: none;
+      background: white;
+      padding: 0 5px;
+    }
+    
+    .floating-label input:focus + label,
+    .floating-label input:not(:placeholder-shown) + label,
+    .floating-label select:focus + label,
+    .floating-label select:not([value=""]) + label {
+      top: -10px;
+      font-size: 12px;
+      color: var(--primary-color);
+    }
+    
+    .section-bg {
+      background-color: var(--light-color);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section-bg:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyMDQsMjA0LDIwNCwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+      opacity: 0.5;
+      z-index: 0;
+    }
+    
+    .section-bg > .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-light);
+      color: var(--primary-color);
+      border-radius: 12px;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    
+    .scroll-down {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 150px 0 120px;
+        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+      }
+      
+      .section-title {
+        margin-bottom: 40px;
+      }
+      
+      footer {
+        clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+      }
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="#">
+      <i class="fas fa-heartbeat me-2"></i> MediCab+
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link px-3" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#actualites">Actualités</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#ressources">Ressources</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#temoignages">Témoignages</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#doctors">Équipe</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#appointment">RDV</a></li>
+        <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero text-center">
+  <div class="container position-relative">
+    <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Votre Santé, Notre Engagement</h1>
+    <p class="lead mb-5 fs-4 animate__animated animate__fadeInUp">Des soins médicaux d'excellence dans un environnement chaleureux et moderne</p>
+    <a href="#appointment" class="btn btn-primary btn-lg px-5 py-3 rounded-pill animate__animated animate__fadeInUp animate__delay-1s">Prendre Rendez-vous</a>
+    <a href="#services" class="scroll-down text-white fs-1 animate__animated animate__fadeInUp animate__delay-2s">
+      <i class="fas fa-chevron-down"></i>
+    </a>
+  </div>
+</header>
+
+<!-- Services Section -->
+<section id="services" class="py-5 section-bg">
+  <div class="container py-5">
+    <h2 class="section-title animate__animated animate__fadeInUp">Nos Services Médicaux</h2>
+    <p class="text-center mb-5 text-muted animate__animated animate__fadeInUp">Une gamme complète de services médicaux pour prendre soin de vous</p>
+    <div class="row g-4">
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.1s">
+        <div class="p-4 bg-white text-center shadow-sm service-box h-100">
+          <div class="icon-wrapper mb-4">
+            <i class="fas fa-stethoscope fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-3">Consultation Générale</h4>
+          <p class="text-muted mb-4">Bilan de santé complet avec nos médecins généralistes expérimentés</p>
+          <a href="#" class="text-primary text-decoration-none fw-medium">En savoir plus <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+        <div class="p-4 bg-white text-center shadow-sm service-box h-100">
+          <div class="icon-wrapper mb-4">
+            <i class="fas fa-heartbeat fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-3">Cardiologie</h4>
+          <p class="text-muted mb-4">Diagnostic et traitement des maladies cardiovasculaires avec technologies de pointe</p>
+          <a href="#" class="text-primary text-decoration-none fw-medium">En savoir plus <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.3s">
+        <div class="p-4 bg-white text-center shadow-sm service-box h-100">
+          <div class="icon-wrapper mb-4">
+            <i class="fas fa-baby fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-3">Pédiatrie</h4>
+          <p class="text-muted mb-4">Suivi médical personnalisé pour vos enfants dans un environnement adapté</p>
+          <a href="#" class="text-primary text-decoration-none fw-medium">En savoir plus <i class="fas fa-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5 animate__animated animate__fadeInUp">
+      <a href="#" class="btn btn-outline-primary px-4 py-2">Voir tous nos services</a>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5">
+  <div class="container py-5">
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <h2 class="mb-4">Pourquoi choisir MediCab+ ?</h2>
+        <p class="lead text-muted mb-5">Nous combinons expertise médicale et approche humaine pour votre bien-être</p>
+        
+        <div class="d-flex mb-4">
+          <div class="feature-icon me-4">
+            <i class="fas fa-user-md"></i>
+          </div>
+          <div>
+            <h5>Experts qualifiés</h5>
+            <p class="text-muted mb-0">Nos médecins sont sélectionnés pour leur expertise et leur humanité</p>
+          </div>
+        </div>
+        
+        <div class="d-flex mb-4">
+          <div class="feature-icon me-4">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div>
+            <h5>Délais rapides</h5>
+            <p class="text-muted mb-0">Rendez-vous disponibles rapidement, souvent sous 48h</p>
+          </div>
+        </div>
+        
+        <div class="d-flex">
+          <div class="feature-icon me-4">
+            <i class="fas fa-comments"></i>
+          </div>
+          <div>
+            <h5>Écoute active</h5>
+            <p class="text-muted mb-0">Nous prenons le temps de vous écouter et de vous comprendre</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="rounded overflow-hidden shadow-lg">
+          <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+               alt="Cabinet médical" class="img-fluid rounded">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Actualités Section -->
+<section id="actualites" class="py-5 section-bg">
+  <div class="container py-5">
+    <h2 class="section-title">Actualités & Événements</h2>
+    <p class="text-center mb-5 text-muted">Restez informés de nos dernières actualités et événements santé</p>
+    <div class="row g-4">
+      <div class="col-lg-8">
+        <div class="row g-4">
+          <div class="col-md-6 animate__animated animate__fadeInLeft">
+            <div class="p-4 bg-white shadow-sm event-card h-100">
+              <div class="badge bg-primary mb-3">Événement</div>
+              <h4>Journée de vaccination</h4>
+              <p class="text-muted mb-2"><i class="far fa-calendar-alt me-2"></i> 25 Mars 2024</p>
+              <p class="mb-3">Campagne gratuite de vaccination contre la grippe saisonnière pour tous les patients</p>
+              <a href="#" class="btn btn-sm btn-outline-primary">Détails</a>
+            </div>
+          </div>
+          <div class="col-md-6 animate__animated animate__fadeInRight">
+            <div class="p-4 bg-white shadow-sm event-card h-100">
+              <div class="badge bg-success mb-3">Atelier</div>
+              <h4>Nutrition & Santé</h4>
+              <p class="text-muted mb-2"><i class="far fa-calendar-alt me-2"></i> 10 Avril 2024</p>
+              <p class="mb-3">Apprenez les bases d'une alimentation équilibrée avec nos spécialistes en nutrition</p>
+              <a href="#contact" class="btn btn-sm btn-outline-primary">S'inscrire</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 animate__animated animate__fadeInUp">
+        <div class="p-4 bg-white shadow-sm h-100 rounded">
+          <h4 class="mb-4 d-flex align-items-center">
+            <i class="far fa-calendar-check me-2 text-primary"></i> Calendrier
+          </h4>
+          <div class="calendar-wrapper">
+            <div class="calendar-header bg-primary text-white p-2 rounded-top text-center">
+              Mars 2024
+            </div>
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th class="text-center">Lun</th>
+                  <th class="text-center">Mar</th>
+                  <th class="text-center">Mer</th>
+                  <th class="text-center">Jeu</th>
+                  <th class="text-center">Ven</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">15</td>
+                  <td class="text-center">16</td>
+                  <td class="text-center bg-primary-light text-primary fw-bold">17*</td>
+                  <td class="text-center">18</td>
+                  <td class="text-center">19</td>
+                </tr>
+                <tr>
+                  <td class="text-center">20</td>
+                  <td class="text-center">21</td>
+                  <td class="text-center">22</td>
+                  <td class="text-center">23</td>
+                  <td class="text-center">24</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="calendar-footer p-2 small text-muted rounded-bottom">
+              * Événement programmé
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ressources Section -->
+<section id="ressources" class="py-5">
+  <div class="container py-5">
+    <h2 class="section-title">Ressources Utiles</h2>
+    <p class="text-center mb-5 text-muted">Documents et informations pour votre santé</p>
+    <div class="row g-4">
+      <div class="col-md-6 animate__animated animate__fadeInUp">
+        <div class="p-4 bg-white text-center shadow-sm h-100 d-flex flex-column rounded">
+          <div class="icon-wrapper mb-4 mx-auto">
+            <i class="fas fa-book-medical fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-2">Guides santé</h4>
+          <p class="text-muted mb-4 flex-grow-1">Téléchargez nos brochures d'information médicale en format PDF pour mieux comprendre votre santé</p>
+          <a href="docs/Consignes.pdf" class="btn btn-outline-primary align-self-center">Télécharger</a>
+        </div>
+      </div>
+      <div class="col-md-6 animate__animated animate__fadeInUp">
+        <div class="p-4 bg-white text-center shadow-sm h-100 d-flex flex-column rounded">
+          <div class="icon-wrapper mb-4 mx-auto">
+            <i class="fas fa-question-circle fa-3x text-primary"></i>
+          </div>
+          <h4 class="mb-2">FAQ Médicale</h4>
+          <p class="text-muted mb-4 flex-grow-1">Réponses aux questions fréquentes sur la santé, les traitements et le fonctionnement du cabinet</p>
+          <a href="docs/Q&A.pdf" class="btn btn-outline-primary align-self-center">Consulter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Témoignages Section -->
+<section id="temoignages" class="py-5 section-bg">
+  <div class="container py-5">
+    <h2 class="section-title">Ce que disent nos patients</h2>
+    <p class="text-center mb-5 text-muted">Découvrez les retours de nos patients satisfaits</p>
+    <div id="carouselTemoignages" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="testimonial text-center mx-auto" style="max-width: 800px;">
+            <img src="https://randomuser.me/api/portraits/women/65.jpg" class="rounded-circle mb-4 shadow" width="120" alt="Patient">
+            <div class="rating mb-3 text-warning">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <blockquote class="blockquote">
+              <p class="mb-4 fs-5">"Un personnel vraiment attentionné et des médecins toujours disponibles. J'ai été particulièrement impressionnée par le suivi personnalisé après ma consultation. Le Dr Karim a pris le temps de m'expliquer en détail mon traitement."</p>
+              <footer class="blockquote-footer">Sophie Martin</footer>
+            </blockquote>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="testimonial text-center mx-auto" style="max-width: 800px;">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="rounded-circle mb-4 shadow" width="120" alt="Patient">
+            <div class="rating mb-3 text-warning">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+            </div>
+            <blockquote class="blockquote">
+              <p class="mb-4 fs-5">"Résultats rapides et explications claires. Le Dr Karim a pris le temps de répondre à toutes mes questions avec patience. L'accueil est chaleureux et les délais d'attente très raisonnables. Je recommande vivement ce cabinet !"</p>
+              <footer class="blockquote-footer">Pierre Dubois</footer>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselTemoignages" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselTemoignages" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Médecins Section -->
+<section id="doctors" class="py-5">
+  <div class="container py-5">
+    <h2 class="section-title">Notre Équipe Médicale</h2>
+    <p class="text-center mb-5 text-muted">Des professionnels expérimentés dévoués à votre bien-être</p>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4 animate__animated animate__fadeInUp">
+        <div class="doctor-card text-center p-0 bg-white shadow-sm h-100 rounded overflow-hidden">
+          <div class="overflow-hidden">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="doctor-img" alt="Dr Ahmed Karim">
+          </div>
+          <div class="p-4">
+            <h4 class="mb-2">Dr Ahmed Karim</h4>
+            <p class="text-primary mb-3">Cardiologue</p>
+            <p class="text-muted mb-4">Spécialiste des maladies cardiovasculaires avec plus de 15 ans d'expérience</p>
+            <div class="social-links">
+              <a href="#" class="text-secondary me-2"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="text-secondary"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+        <div class="doctor-card text-center p-0 bg-white shadow-sm h-100 rounded overflow-hidden">
+          <div class="overflow-hidden">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="doctor-img" alt="Dr Nadia Ben Salah">
+          </div>
+          <div class="p-4">
+            <h4 class="mb-2">Dr Nadia Ben Salah</h4>
+            <p class="text-primary mb-3">Pédiatre</p>
+            <p class="text-muted mb-4">Spécialiste de la santé infantile, diplômée en pédiatrie et nutrition infantile</p>
+            <div class="social-links">
+              <a href="#" class="text-secondary me-2"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="text-secondary"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+        <div class="doctor-card text-center p-0 bg-white shadow-sm h-100 rounded overflow-hidden">
+          <div class="overflow-hidden">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="doctor-img" alt="Dr Youssef Mahdi">
+          </div>
+          <div class="p-4">
+            <h4 class="mb-2">Dr Youssef Mahdi</h4>
+            <p class="text-primary mb-3">Médecin Généraliste</p>
+            <p class="text-muted mb-4">Médecin de famille avec une approche holistique de la santé depuis 2008</p>
+            <div class="social-links">
+              <a href="#" class="text-secondary me-2"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="text-secondary"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Rendez-vous Section -->
+<section id="appointment" class="py-5 section-bg">
+  <div class="container py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0 animate__animated animate__fadeInLeft">
+        <h2 class="mb-4">Prendre un Rendez-vous</h2>
+        <p class="lead mb-4">Prenez rendez-vous en ligne avec l'un de nos spécialistes en quelques clics seulement.</p>
+        <ul class="list-unstyled">
+          <li class="mb-3 d-flex align-items-start">
+            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+            <span>Consultation rapide sous 48h pour les urgences</span>
+          </li>
+          <li class="mb-3 d-flex align-items-start">
+            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+            <span>Rappel SMS et email avant le rendez-vous</span>
+          </li>
+          <li class="mb-3 d-flex align-items-start">
+            <i class="fas fa-check-circle text-primary mt-1 me-3"></i>
+            <span>Annulation et modification facile en ligne</span>
+          </li>
+        </ul>
+        <div class="contact-info mt-5 bg-white p-4 rounded shadow-sm">
+          <h5 class="mb-3">Contact direct</h5>
+          <p class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i> 01 23 45 67 89</p>
+          <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> contact@medicabplus.fr</p>
+          <p><i class="fas fa-map-marker-alt me-2 text-primary"></i> 123 Rue de la Santé, 75015 Paris</p>
+        </div>
+      </div>
+      <div class="col-lg-6 animate__animated animate__fadeInRight">
+        <div class="appointment-form">
+          <div class="appointment-form-header">
+            <h4 class="mb-0">Formulaire de rendez-vous</h4>
+          </div>
+          <div class="p-4 p-lg-5">
+            <form method="post" action="rdv.php">
+              <div class="floating-label mb-4">
+                <input type="text" class="form-control" id="fullName" name="fullName" placeholder=" " required>
+                <label for="fullName">Nom complet</label>
+              </div>
+              <div class="floating-label mb-4">
+                <input type="email" class="form-control" id="email" name="email" placeholder=" " required>
+                <label for="email">Email</label>
+              </div>
+              <div class="floating-label mb-4">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder=" " required>
+                <label for="phone">Téléphone</label>
+              </div>
+              <div class="row g-3 mb-4">
+                <div class="col-md-6 floating-label">
+                  <input type="date" class="form-control" id="date" name="date" placeholder=" " required>
+                  <label for="date">Date</label>
+                </div>
+                <div class="col-md-6 floating-label">
+                  <select class="form-select" id="time" name="time" required>
+                    <option value="" selected disabled></option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                  </select>
+                  <label for="time">Heure</label>
+                </div>
+              </div>
+              <div class="floating-label mb-4">
+                <select class="form-select" id="doctor" name="doctor" required>
+                  <option value="" selected disabled></option>
+                  <option value="Dr Ahmed Karim (Cardiologue)">Dr Ahmed Karim (Cardiologue)</option>
+                  <option value="Dr Nadia Ben Salah (Pédiatre)">Dr Nadia Ben Salah (Pédiatre)</option>
+                  <option value="Dr Youssef Mahdi (Généraliste)">Dr Youssef Mahdi (Généraliste)</option>
+                </select>
+                <label for="doctor">Médecin</label>
+              </div>
+              <button type="submit" class="btn btn-primary w-100 py-3">Confirmer le rendez-vous</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5">
+  <div class="container py-5">
+    <h2 class="section-title">Nous Contacter</h2>
+    <p class="text-center mb-5 text-muted">Une question ? Nous sommes à votre écoute</p>
+    <div class="row g-5">
+      <div class="col-lg-5 animate__animated animate__fadeInLeft">
+        <div class="contact-info bg-white p-4 p-lg-5 rounded shadow-sm h-100">
+          <h4 class="mb-4">Informations de contact</h4>
+          <div class="d-flex mb-4">
+            <div class="me-4 text-primary">
+              <i class="fas fa-map-marker-alt fa-2x"></i>
+            </div>
+            <div>
+              <h5>Adresse</h5>
+              <p class="mb-0">123 Rue de la Santé<br>75015 Paris, France</p>
+            </div>
+          </div>
+          <div class="d-flex mb-4">
+            <div class="me-4 text-primary">
+              <i class="fas fa-phone-alt fa-2x"></i>
+            </div>
+            <div>
+              <h5>Téléphone</h5>
+              <p class="mb-0">01 23 45 67 89</p>
+            </div>
+          </div>
+          <div class="d-flex mb-4">
+            <div class="me-4 text-primary">
+              <i class="fas fa-envelope fa-2x"></i>
+            </div>
+            <div>
+              <h5>Email</h5>
+              <p class="mb-0">contact@medicabplus.fr</p>
+            </div>
+          </div>
+          <div class="d-flex mb-4">
+            <div class="me-4 text-primary">
+              <i class="fas fa-clock fa-2x"></i>
+            </div>
+            <div>
+              <h5>Horaires d'ouverture</h5>
+              <p class="mb-0">Lun-Ven: 8h-19h<br>Sam: 9h-13h</p>
+            </div>
+          </div>
+          <div class="mt-4">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.99144060821!2d2.292292615509614!3d48.85837360866186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sTour%20Eiffel!5e0!3m2!1sfr!2sfr!4v1623257131491!5m2!1sfr!2sfr" 
+                    width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 animate__animated animate__fadeInRight">
+        <div class="bg-white p-4 p-lg-5 rounded shadow-sm">
+          <h4 class="mb-4">Envoyez-nous un message</h4>
+          <form action="contact.php" method="post">
+            <div class="row g-3 mb-4">
+              <div class="col-md-6 floating-label">
+                <input type="text" class="form-control" id="contactName" name="name" placeholder=" " required>
+                <label for="contactName">Votre nom</label>
+              </div>
+              <div class="col-md-6 floating-label">
+                <input type="email" class="form-control" id="contactEmail" name="email" placeholder=" " required>
+                <label for="contactEmail">Votre email</label>
+              </div>
+            </div>
+            <div class="floating-label mb-4">
+              <input type="text" class="form-control" id="subject" name="subject" placeholder=" " required>
+              <label for="subject">Sujet</label>
+            </div>
+            <div class="floating-label mb-4">
+              <textarea class="form-control" id="message" name="message" rows="5" placeholder=" " required></textarea>
+              <label for="message">Votre message</label>
+            </div>
+            <button type="submit" class="btn btn-primary px-4 py-3">Envoyer le message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="text-center text-lg-start">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <h5 class="text-uppercase mb-4 d-flex align-items-center">
+          <i class="fas fa-heartbeat me-3 fs-3"></i> <span>MediCab+</span>
+        </h5>
+        <p class="mb-4">
+          Cabinet médical pluridisciplinaire offrant des soins de qualité dans un environnement moderne et chaleureux au cœur de Paris.
+        </p>
+        <div class="mt-4">
+          <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon me-2"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Services</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Consultation</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Cardiologie</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Pédiatrie</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Vaccination</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Bilans de santé</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Liens utiles</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Mentions légales</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">CGU</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Politique de confidentialité</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Plan du site</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h5 class="text-uppercase mb-4">Newsletter</h5>
+        <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos actualités et conseils santé.</p>
+        <form class="mb-4">
+          <div class="input-group">
+            <input type="email" class="form-control" placeholder="Votre email" aria-label="Votre email">
+            <button class="btn btn-primary" type="button">S'abonner</button>
+          </div>
+        </form>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-map-marker-alt me-3"></i>
+          <p class="mb-0">123 Rue de la Santé, 75015 Paris</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-4 border-top border-white border-opacity-10">
+    &copy; 2025 MediCab+ - Tous droits réservés
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Initialize carousel
+  const myCarousel = new bootstrap.Carousel('#carouselTemoignages', {
+    interval: 5000,
+    wrap: true
+  });
+
+  // Animation on scroll
+  function animateOnScroll() {
+    const elements = document.querySelectorAll('.animate__animated');
+    
+    elements.forEach(element => {
+      const elementPosition = element.getBoundingClientRect().top;
+      const screenPosition = window.innerHeight / 1.2;
+      
+      if (elementPosition < screenPosition) {
+        const animationClass = element.classList.item(1); // Get the animation class
+        element.classList.add(animationClass);
+      }
+    });
+  }
+
+  window.addEventListener('load', animateOnScroll);
+  window.addEventListener('scroll', animateOnScroll);
+
+  // Floating labels enhancement
+  document.querySelectorAll('.floating-label input, .floating-label select, .floating-label textarea').forEach(el => {
+    el.addEventListener('focus', () => {
+      el.parentNode.querySelector('label').style.color = '#2c7be5';
+    });
+    
+    el.addEventListener('blur', () => {
+      if (!el.value) {
+        el.parentNode.querySelector('label').style.color = '#6c757d';
+      }
+    });
+    
+    // Initialize labels for prefilled values
+    if (el.value) {
+      el.parentNode.querySelector('label').style.top = '-10px';
+      el.parentNode.querySelector('label').style.fontSize = '12px';
+    }
+  });
+</script>
+</body>
+</html>
