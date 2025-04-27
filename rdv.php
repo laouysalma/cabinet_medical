@@ -15,8 +15,8 @@ $phone = $_POST['phone'];
 $rdv_date = $_POST['rdv_date'];
 $rdv_time = $_POST['rdv_time'];
 $doctor = $_POST['doctor'];
-$sql = "INSERT INTO rdv (full_name, email, phone, rdv_date, rdv_time, doctor) 
-        VALUES($full_name, $email, $phone, $rdv_date, $rdv_time, $doctor) ";
+$sql = "INSERT INTO rdv ( full_name, email, phone, rdv_date, rdv_time, doctor) 
+        VALUES('$full_name', '$email', '$phone', '$rdv_date', '$rdv_time', '$doctor') ";
 if ($conn->query($sql) === TRUE) {
     echo "TU prent votre rdv avec succès.";
 } else {
