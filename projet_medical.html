@@ -7,333 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-  <style>
-    :root {
-      --primary-color: #2c7be5;
-      --primary-light: #e8f2fe;
-      --secondary-color: #6c757d;
-      --accent-color: #00d97e;
-      --dark-color: #1a2a3a;
-      --light-color: #f8f9fa;
-      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    }
-    
-    body { 
-      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      line-height: 1.7;
-      color: #495057;
-      overflow-x: hidden;
-    }
-    
-    .hero {
-      background: linear-gradient(135deg, rgba(26, 42, 58, 0.85) 0%, rgba(44, 123, 229, 0.8) 100%), 
-                  url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') center center/cover no-repeat;
-      color: white;
-      padding: 200px 0 180px;
-      position: relative;
-      clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-    }
-    
-    .section-title { 
-      position: relative;
-      text-align: center; 
-      margin-bottom: 60px;
-      color: var(--dark-color);
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    
-    .section-title:after {
-      content: '';
-      display: block;
-      width: 80px;
-      height: 4px;
-      background: var(--accent-color);
-      margin: 20px auto 15px;
-      border-radius: 2px;
-    }
-    
-    .service-box, .event-card { 
-      transition: var(--transition);
-      border-radius: 12px;
-      overflow: hidden;
-      height: 100%;
-      border: none;
-      position: relative;
-      z-index: 1;
-    }
-    
-    .service-box:before, .event-card:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-      opacity: 0;
-      z-index: -1;
-      transition: var(--transition);
-    }
-    
-    .service-box:hover, .event-card:hover { 
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12) !important;
-      color: white;
-    }
-    
-    .service-box:hover:before, .event-card:hover:before {
-      opacity: 1;
-    }
-    
-    .service-box:hover .icon-wrapper i,
-    .service-box:hover .text-muted,
-    .service-box:hover a {
-      color: white !important;
-    }
-    
-    .testimonial {
-      background: white;
-      border-radius: 15px;
-      padding: 40px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-      position: relative;
-    }
-    
-    .testimonial:after {
-      content: '\201D';
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 80px;
-      color: var(--primary-light);
-      font-family: serif;
-      line-height: 1;
-    }
-    
-    .resource-icon { 
-      width: 70px; 
-      height: 70px;
-      margin-bottom: 20px;
-      object-fit: contain;
-    }
-    
-    footer { 
-      background: var(--dark-color); 
-      padding: 80px 0 0;
-      color: white;
-      clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
-    }
-    
-    .navbar {
-      transition: var(--transition);
-      padding: 15px 0;
-    }
-    
-    .navbar.scrolled {
-      background-color: white !important;
-      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
-      padding: 10px 0;
-    }
-    
-    .navbar.scrolled .nav-link {
-      color: var(--dark-color) !important;
-    }
-    
-    .navbar.scrolled .navbar-brand {
-      color: var(--primary-color) !important;
-    }
-    
-    .btn-primary {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
-      padding: 12px 28px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      transition: var(--transition);
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3);
-    }
-    
-    .btn-outline-primary {
-      color: var(--primary-color);
-      border-color: var(--primary-color);
-      padding: 12px 28px;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-    
-    .btn-outline-primary:hover {
-      background-color: var(--primary-color);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3);
-    }
-    
-    .doctor-card {
-      transition: var(--transition);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    
-    .doctor-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-    }
-    
-    .doctor-img {
-      height: 200px;
-      object-fit: cover;
-      width: 100%;
-      transition: var(--transition);
-    }
-    
-    .doctor-card:hover .doctor-img {
-      transform: scale(1.05);
-    }
-    
-    .form-control, .form-select {
-      padding: 12px 15px;
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
-      transition: var(--transition);
-    }
-    
-    .form-control:focus, .form-select:focus {
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 0.25rem rgba(44, 123, 229, 0.15);
-    }
-    
-    .social-icon {
-      width: 40px;
-      height: 40px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      margin: 0 5px;
-      transition: var(--transition);
-    }
-    
-    .social-icon:hover {
-      background: var(--accent-color);
-      transform: translateY(-5px);
-    }
-    
-    .appointment-form {
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-    }
-    
-    .appointment-form-header {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    
-    .floating-label {
-      position: relative;
-      margin-bottom: 20px;
-    }
-    
-    .floating-label label {
-      position: absolute;
-      top: 12px;
-      left: 15px;
-      color: var(--secondary-color);
-      transition: var(--transition);
-      pointer-events: none;
-      background: white;
-      padding: 0 5px;
-    }
-    
-    .floating-label input:focus + label,
-    .floating-label input:not(:placeholder-shown) + label,
-    .floating-label select:focus + label,
-    .floating-label select:not([value=""]) + label {
-      top: -10px;
-      font-size: 12px;
-      color: var(--primary-color);
-    }
-    
-    .section-bg {
-      background-color: var(--light-color);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .section-bg:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyMDQsMjA0LDIwNCwwLjEpIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
-      opacity: 0.5;
-      z-index: 0;
-    }
-    
-    .section-bg > .container {
-      position: relative;
-      z-index: 1;
-    }
-    
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--primary-light);
-      color: var(--primary-color);
-      border-radius: 12px;
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    
-    .scroll-down {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: bounce 2s infinite;
-    }
-    
-    @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0) translateX(-50%);
-      }
-      40% {
-        transform: translateY(-20px) translateX(-50%);
-      }
-      60% {
-        transform: translateY(-10px) translateX(-50%);
-      }
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .hero {
-        padding: 150px 0 120px;
-        clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
-      }
-      
-      .section-title {
-        margin-bottom: 40px;
-      }
-      
-      footer {
-        clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar">
 
@@ -385,7 +59,9 @@
           </div>
           <h4 class="mb-3">Consultation Générale</h4>
           <p class="text-muted mb-4">Bilan de santé complet avec nos médecins généralistes expérimentés</p>
-          <a href="#" class="text-primary text-decoration-none fw-medium">En savoir plus <i class="fas fa-arrow-right ms-2"></i></a>
+          <a href="#" class="text-primary text-decoration-none fw-medium" data-bs-toggle="modal" data-bs-target="#consultationModal">
+            En savoir plus <i class="fas fa-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
       <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.2s">
@@ -395,7 +71,9 @@
           </div>
           <h4 class="mb-3">Cardiologie</h4>
           <p class="text-muted mb-4">Diagnostic et traitement des maladies cardiovasculaires avec technologies de pointe</p>
-          <a href="#" class="text-primary text-decoration-none fw-medium">En savoir plus <i class="fas fa-arrow-right ms-2"></i></a>
+          <a href="#" class="text-primary text-decoration-none fw-medium" data-bs-toggle="modal" data-bs-target="#cardiologieModal">
+            En savoir plus <i class="fas fa-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
       <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.3s">
@@ -405,12 +83,14 @@
           </div>
           <h4 class="mb-3">Pédiatrie</h4>
           <p class="text-muted mb-4">Suivi médical personnalisé pour vos enfants dans un environnement adapté</p>
-          <a href="#" class="text-primary text-decoration-none fw-medium">En savoir plus <i class="fas fa-arrow-right ms-2"></i></a>
+          <a href="#" class="text-primary text-decoration-none fw-medium" data-bs-toggle="modal" data-bs-target="#pediatrieModal">
+            En savoir plus <i class="fas fa-arrow-right ms-2"></i>
+          </a>
         </div>
       </div>
     </div>
     <div class="text-center mt-5 animate__animated animate__fadeInUp">
-      <a href="#" class="btn btn-outline-primary px-4 py-2">Voir tous nos services</a>
+      <a href="#" class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#servicesModal">Voir tous nos services</a>
     </div>
   </div>
 </section>
@@ -830,8 +510,8 @@
               <label for="subject">Sujet</label>
             </div>
             <div class="floating-label mb-4">
-              <textarea class="form-control" id="message" name="message" rows="5" placeholder=" " required></textarea>
-              <label for="message">Votre message</label>
+              <textarea class="form-control" id="meassagee" name="message" rows="12" placeholder="Votre message" required></textarea>
+              <label for="meassagee"></label>
             </div>
             <button type="submit" class="btn btn-primary px-4 py-3">Envoyer le message</button>
           </form>
@@ -900,74 +580,153 @@
   </div>
 </footer>
 
+<!-- Modals -->
+<!-- Modal Consultation Générale -->
+<div class="modal fade" id="consultationModal" tabindex="-1" aria-labelledby="consultationModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="consultationModalLabel">Consultation Générale</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        Bilan de santé complet : analyse de sang, contrôle tension, consultation approfondie avec nos médecins.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cardiologie -->
+<div class="modal fade" id="cardiologieModal" tabindex="-1" aria-labelledby="cardiologieModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cardiologieModalLabel">Cardiologie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        Diagnostic complet des maladies cardiovasculaires, échographie cardiaque, électrocardiogramme et traitement spécialisé.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Pédiatrie -->
+<div class="modal fade" id="pediatrieModal" tabindex="-1" aria-labelledby="pediatrieModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pediatrieModalLabel">Pédiatrie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body">
+        Suivi médical personnalisé pour les enfants : vaccinations, bilans de croissance, et conseils pédiatriques dans un environnement rassurant.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Tous nos Services -->
+<div class="modal fade" id="servicesModal" tabindex="-1" aria-labelledby="servicesModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-lg">
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title" id="servicesModalLabel">Tous nos Services Médicaux</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+      <div class="modal-body p-4">
+        <p class="lead text-center mb-5">Découvrez l'ensemble de nos spécialités médicales :</p>
+
+        <div class="row g-4">
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-stethoscope fa-2x text-primary me-3"></i>
+            <div>
+              <h6 class="mb-1">Consultation Générale</h6>
+              <small class="text-muted">Bilan de santé et consultations de médecine générale</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-heartbeat fa-2x text-danger me-3"></i>
+            <div>
+              <h6 class="mb-1">Cardiologie</h6>
+              <small class="text-muted">Diagnostic et traitement des maladies cardiovasculaires</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-baby fa-2x text-success me-3"></i>
+            <div>
+              <h6 class="mb-1">Pédiatrie</h6>
+              <small class="text-muted">Suivi médical spécialisé pour les enfants</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-female fa-2x text-pink me-3"></i>
+            <div>
+              <h6 class="mb-1">Gynécologie</h6>
+              <small class="text-muted">Santé de la femme, suivi de grossesse et plus</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-sun fa-2x text-warning me-3"></i>
+            <div>
+              <h6 class="mb-1">Dermatologie</h6>
+              <small class="text-muted">Traitements pour peau, cheveux et ongles</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-headphones-alt fa-2x text-info me-3"></i>
+            <div>
+              <h6 class="mb-1">ORL</h6>
+              <small class="text-muted">Oreille, nez, gorge - diagnostics et soins spécialisés</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-x-ray fa-2x text-primary me-3"></i>
+            <div>
+              <h6 class="mb-1">Radiologie</h6>
+              <small class="text-muted">Imagerie médicale de haute précision</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-dumbbell fa-2x text-success me-3"></i>
+            <div>
+              <h6 class="mb-1">Kinésithérapie</h6>
+              <small class="text-muted">Rééducation physique et soins fonctionnels</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-apple-alt fa-2x text-danger me-3"></i>
+            <div>
+              <h6 class="mb-1">Nutrition</h6>
+              <small class="text-muted">Conseils diététiques personnalisés</small>
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex align-items-start">
+            <i class="fas fa-ambulance fa-2x text-danger me-3"></i>
+            <div>
+              <h6 class="mb-1">Urgences Médicales</h6>
+              <small class="text-muted">Prise en charge rapide des situations critiques</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Navbar scroll effect
-  window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
-  });
-
-  // Smooth scrolling for anchor links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-      }
-    });
-  });
-
-  // Initialize carousel
-  const myCarousel = new bootstrap.Carousel('#carouselTemoignages', {
-    interval: 5000,
-    wrap: true
-  });
-
-  // Animation on scroll
-  function animateOnScroll() {
-    const elements = document.querySelectorAll('.animate__animated');
-    
-    elements.forEach(element => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const screenPosition = window.innerHeight / 1.2;
-      
-      if (elementPosition < screenPosition) {
-        const animationClass = element.classList.item(1); // Get the animation class
-        element.classList.add(animationClass);
-      }
-    });
-  }
-
-  window.addEventListener('load', animateOnScroll);
-  window.addEventListener('scroll', animateOnScroll);
-
-  // Floating labels enhancement
-  document.querySelectorAll('.floating-label input, .floating-label select, .floating-label textarea').forEach(el => {
-    el.addEventListener('focus', () => {
-      el.parentNode.querySelector('label').style.color = '#2c7be5';
-    });
-    
-    el.addEventListener('blur', () => {
-      if (!el.value) {
-        el.parentNode.querySelector('label').style.color = '#6c757d';
-      }
-    });
-    
-    // Initialize labels for prefilled values
-    if (el.value) {
-      el.parentNode.querySelector('label').style.top = '-10px';
-      el.parentNode.querySelector('label').style.fontSize = '12px';
-    }
-  });
-</script>
+<script src="script.js"></script>
 </body>
 </html>
