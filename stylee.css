@@ -330,3 +330,63 @@
       clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
     }
   }
+  /* Styles pour les tableaux de bord */
+.dashboard-card {
+  transition: all 0.3s ease;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour les modals */
+.modal-content {
+  border-radius: 15px;
+  border: none;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+/* Styles pour les formulaires */
+.floating-label {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.floating-label label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 1rem .75rem;
+  pointer-events: none;
+  border: 1px solid transparent;
+  transform-origin: 0 0;
+  transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+}
+
+.floating-label input:focus ~ label,
+.floating-label input:not(:placeholder-shown) ~ label,
+.floating-label select:focus ~ label,
+.floating-label select:not([value=""]) ~ label {
+  transform: scale(.85) translateY(-.75rem) translateX(.15rem);
+  opacity: .65;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-card {
+      margin-bottom: 20px;
+  }
+}
