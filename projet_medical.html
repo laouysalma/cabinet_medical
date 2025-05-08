@@ -28,7 +28,19 @@
         <li class="nav-item"><a class="nav-link px-3" href="#temoignages">Témoignages</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#doctors">Équipe</a></li>
         <li class="nav-item"><a class="nav-link px-3" href="#appointment">RDV</a></li>
+        
         <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-3" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown">
+            <i class="fas fa-user me-1"></i> Compte
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Connexion</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerPatientModal">Inscription Patient</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerDoctorModal">Inscription Médecin</a></li>
+          </ul>
+        </li>
       </ul>
     </div>
   </div>
@@ -763,7 +775,146 @@
     </div>
   </div>
 </div>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="login.php" method="post">
+          <div class="mb-3">
+            <label for="loginEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="loginEmail" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="loginPassword" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="loginPassword" name="password" required>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+        </form>
+        <div class="text-center mt-3">
+          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Mot de passe oublié ?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Register Patient Modal -->
+<div class="modal fade" id="registerPatientModal" tabindex="-1" aria-labelledby="registerPatientModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerPatientModalLabel">Inscription Patient</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="register_patient.php" method="post">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="patientFirstName" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="patientFirstName" name="first_name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="patientLastName" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="patientLastName" name="last_name" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="patientEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="patientEmail" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="patientPhone" class="form-label">Téléphone</label>
+            <input type="tel" class="form-control" id="patientPhone" name="phone" required>
+          </div>
+          <div class="mb-3">
+            <label for="patientPassword" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="patientPassword" name="password" required>
+          </div>
+          <div class="mb-3">
+            <label for="patientConfirmPassword" class="form-label">Confirmer le mot de passe</label>
+            <input type="password" class="form-control" id="patientConfirmPassword" name="confirm_password" required>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="patientTerms" required>
+            <label class="form-check-label" for="patientTerms">J'accepte les <a href="#">conditions d'utilisation</a></label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Doctor Modal -->
+<div class="modal fade" id="registerDoctorModal" tabindex="-1" aria-labelledby="registerDoctorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerDoctorModalLabel">Inscription Médecin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="register_doctor.php" method="post" enctype="multipart/form-data">
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="doctorFirstName" class="form-label">Prénom</label>
+              <input type="text" class="form-control" id="doctorFirstName" name="first_name" required>
+            </div>
+            <div class="col-md-6">
+              <label for="doctorLastName" class="form-label">Nom</label>
+              <input type="text" class="form-control" id="doctorLastName" name="last_name" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="doctorEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="doctorEmail" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="doctorSpecialty" class="form-label">Spécialité</label>
+            <select class="form-select" id="doctorSpecialty" name="specialty" required>
+              <option value="">Choisir une spécialité</option>
+              <option value="Cardiologue">Cardiologue</option>
+              <option value="Pédiatre">Pédiatre</option>
+              <option value="Généraliste">Médecin Généraliste</option>
+              <option value="Dermatologue">Dermatologue</option>
+              <option value="ORL">ORL</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="doctorPhone" class="form-label">Téléphone</label>
+            <input type="tel" class="form-control" id="doctorPhone" name="phone" required>
+          </div>
+          <div class="mb-3">
+            <label for="doctorPassword" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="doctorPassword" name="password" required>
+          </div>
+          <div class="mb-3">
+            <label for="doctorConfirmPassword" class="form-label">Confirmer le mot de passe</label>
+            <input type="password" class="form-control" id="doctorConfirmPassword" name="confirm_password" required>
+          </div>
+          <div class="mb-3">
+            <label for="doctorDiploma" class="form-label">Diplôme (PDF)</label>
+            <input type="file" class="form-control" id="doctorDiploma" name="diploma" accept=".pdf" required>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="doctorTerms" required>
+            <label class="form-check-label" for="doctorTerms">J'accepte les <a href="#">conditions d'utilisation</a></label>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Footer -->
 <footer class="text-center text-lg-start">
