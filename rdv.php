@@ -1,48 +1,54 @@
 <?php
+session_start();
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['patient_id'])) {
+    $_SESSION['redirect_url'] = basename($_SERVER['PHP_SELF']); // Stocke la page actuelle
+    header("Location: login.php?error=not_logged_in");
+    exit;
+}
+// Configuration de la base de données
 $host = "localhost";
 $user = "root";
 $pass = "";
 $dbname = "cabinet_medical";
 
-// Connexion
+// Connexion MySQLi
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
-    die("Connexion échouée : " . $conn->connect_error);
+    die("Erreur de connexion: " . $conn->connect_error);
 }
 
-// Vérification de la méthode POST
+// Traitement du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Vérifie que toutes les clés existent
-    if (
-        isset($_POST['fullName']) &&
-        isset($_POST['email']) &&
-        isset($_POST['phone']) &&
-        isset($_POST['rdv_date']) &&
-        isset($_POST['rdv_time']) &&
-        isset($_POST['doctor'])
-    ) {
-        $full_name = $_POST['fullName'];
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $rdv_date = $_POST['rdv_date'];
-        $rdv_time = $_POST['rdv_time'];
-        $doctor = $_POST['doctor'];
+    // Nettoyage des données
+    $full_name = htmlspecialchars($_POST['fullName']);
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $phone = preg_replace('/[^0-9]/', '', $_POST['phone']);
+    $rdv_date = $_POST['rdv_date'];
+    $rdv_time = $_POST['rdv_time'];
+    $doctor = htmlspecialchars($_POST['doctor']);
+    $patient_id = (int)$_SESSION['patient_id'];
 
-        // Préparer et exécuter la requête (plus sécurisé)
-        $stmt = $conn->prepare("INSERT INTO rdv (full_name, email, phone, rdv_date, rdv_time, doctor) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $full_name, $email, $phone, $rdv_date, $rdv_time, $doctor);
-
-        if ($stmt->execute()) {
-            echo "TU prent votre rdv avec succès.";
-        } else {
-            echo "Erreur lors de l'insertion : " . $stmt->error;
-        }
-
-        $stmt->close();
-    } else {
-        echo "Erreur : champs manquants dans le formulaire.";
+    // Validation des champs
+    if (empty($full_name) || empty($email) || empty($phone) || empty($rdv_date) || empty($rdv_time) || empty($doctor)) {
+        header("Location: appointment.php?error=missing_fields");
+        exit;
     }
+
+    // Insertion sécurisée
+    $stmt = $conn->prepare("INSERT INTO rdv (patient_id, full_name, email, phone, rdv_date, rdv_time, doctor) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("issssss", $patient_id, $full_name, $email, $phone, $rdv_date, $rdv_time, $doctor);
+
+    if ($stmt->execute()) {
+        header("Location: login.php?success=rdv_created");
+    } else {
+        header("Location: mes_rdv.php?error=db_error");
+    }
+    exit;
 }
 
-$conn->close();
+// Si accès direct au fichier
+header("Location: appointment.php");
+exit;
 ?>

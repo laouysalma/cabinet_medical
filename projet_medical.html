@@ -3,48 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cabinet Médical MediCab+ - Soins d'excellence</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Cabinet Médical MediCab+ - Soins d'excellence</title>
+  <!-- Optimisation des CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="stylee.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar">
 
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top py-3">
-  <div class="container">
-    <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="#">
-      <i class="fas fa-heartbeat me-2"></i> MediCab+
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link px-3" href="#services">Services</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#actualites">Actualités</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#ressources">Ressources</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#temoignages">Témoignages</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#doctors">Équipe</a></li>
-        <li class="nav-item"><a class="nav-link px-3" href="#appointment">RDV</a></li>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top py-2">
+    <div class="container">
+      <a class="navbar-brand fw-bold fs-3 d-flex align-items-center" href="#">
+        <i class="fas fa-heartbeat me-2"></i> MediCab+
+      </a>
+    
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto me-3">
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#actualites">Actualités</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ressources">Ressources</a></li>
+          <li class="nav-item"><a class="nav-link" href="#temoignages">Témoignages</a></li>
+          <li class="nav-item"><a class="nav-link" href="#doctors">Équipe</a></li>
+          <li class="nav-item"><a class="nav-link" href="#appointment">RDV</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
         
-        <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle px-3" href="#" id="authDropdown" role="button" data-bs-toggle="dropdown">
-            <i class="fas fa-user me-1"></i> Compte
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Connexion</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerPatientModal">Inscription Patient</a></li>
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#registerDoctorModal">Inscription Médecin</a></li>
-          </ul>
-        </li>
-      </ul>
+        <div class="d-flex align-items-center">
+          <?php if(!isset($_SESSION['patient_id'])): ?>
+            <button class="btn btn-outline-primary me-2" onclick="openModal('loginModal')">Connexion</button>
+            <button class="btn btn-primary" onclick="openModal('signupModal')">Inscription</button>
+          <?php else: ?>
+            <div class="dropdown profile-section">
+              <button class="profile-btn" id="dropdownMenuButton">
+                <i class="fas fa-user-circle fa-lg"></i>
+                <span class="d-none d-md-inline"><?= htmlspecialchars($user['username']) ?></span>
+              </button>
+              <div class="dropdown-content" id="dropdownMenu">
+
+                <a href="profile.php"><i class="fas fa-user"></i>Me</a><br>
+                <a href="mes_rdv.php"><i class="fas fa-calendar-alt"></i> Mes RDV</a>
+                <div class="dropdown-divider"></div>
+                <a href="logout.php"><i class="fas fa-sign-out-alt"></i>Logout</a>
+              </div>
+            </div>
+          <?php endif; ?>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
 <!-- Hero Section -->
 <header class="hero text-center">
@@ -55,6 +68,7 @@
     <a href="#services" class="scroll-down text-white fs-1 animate__animated animate__fadeInUp animate__delay-2s">
       <i class="fas fa-chevron-down"></i>
     </a>
+    
   </div>
 </header>
 
@@ -104,6 +118,7 @@
     <div class="text-center mt-5 animate__animated animate__fadeInUp">
       <a href="#" class="btn btn-outline-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#servicesModal">Voir tous nos services</a>
     </div>
+  
   </div>
 </section>
 
@@ -169,7 +184,7 @@
               <h4>Journée de vaccination</h4>
               <p class="text-muted mb-2"><i class="far fa-calendar-alt me-2"></i> 25 Mars 2024</p>
               <p class="mb-3">Campagne gratuite de vaccination contre la grippe saisonnière pour tous les patients</p>
-              
+              <a href="#" class="btn btn-sm btn-outline-primary">Détails</a>
             </div>
           </div>
           <div class="col-md-6 animate__animated animate__fadeInRight">
@@ -259,7 +274,7 @@
   </div>
 </section>
 
-   
+<!-- Témoignages Section -->
 <section id="temoignages" class="py-5 section-bg">
   <div class="container py-5">
     <h2 class="section-title">Ce que disent nos patients</h2>
@@ -311,159 +326,64 @@
   </div>
 </section>
 
-<!-- Médecin section-->
-<section id="doctors" class="doctors-section">
-    <div class="container">
-        <h2 class="section-title">Notre Équipe Médicale</h2>
-        <p class="section-subtitle">Des professionnels qualifiés à votre service</p>
-        
-        <div class="row">
-            <!-- Médecin 1 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr Ahmed Karim" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Ahmed Karim</h4>
-                        <span class="doctor-specialty">Cardiologue</span>
-                        <p class="doctor-bio">Spécialiste des maladies cardiovasculaires avec plus de 15 ans d'expérience</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
+<!-- Médecins Section -->
+<section id="doctors" class="py-5">
+  <div class="container py-5">
+    <h2 class="section-title">Notre Équipe Médicale</h2>
+    <p class="text-center mb-5 text-muted">Des professionnels expérimentés dévoués à votre bien-être</p>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-4 animate__animated animate__fadeInUp">
+        <div class="doctor-card text-center p-0 bg-white shadow-sm h-100 rounded overflow-hidden">
+          <div class="overflow-hidden">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="doctor-img" alt="Dr Ahmed Karim">
+          </div>
+          <div class="p-4">
+            <h4 class="mb-2">Dr Ahmed Karim</h4>
+            <p class="text-primary mb-3">Cardiologue</p>
+            <p class="text-muted mb-4">Spécialiste des maladies cardiovasculaires avec plus de 15 ans d'expérience</p>
+            <div class="social-links">
+              <a href="#" class="text-secondary me-2"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="text-secondary"><i class="fas fa-envelope"></i></a>
             </div>
-
-            <!-- Médecin 2 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Dr Nadia Ben Salah" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Nadia Ben Salah</h4>
-                        <span class="doctor-specialty">Pédiatre</span>
-                        <p class="doctor-bio">Spécialiste en santé infantile et nutrition, diplômée depuis 2010</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Médecin 3 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Dr Youssef Mahdi" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Youssef Mahdi</h4>
-                        <span class="doctor-specialty">Médecin Généraliste</span>
-                        <p class="doctor-bio">Médecin de famille avec approche holistique depuis 2008</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Médecin 4 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Dr Leila Mourad" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Leila Mourad</h4>
-                        <span class="doctor-specialty">Gynécologue</span>
-                        <p class="doctor-bio">Spécialiste en santé féminine et suivi de grossesse</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Médecin 5 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Dr Samir Chahine" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Samir Chahine</h4>
-                        <span class="doctor-specialty">Dermatologue</span>
-                        <p class="doctor-bio">Expert en dermatologie médicale et cosmétique</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Médecin 6 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Dr Amira Taha" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Amira Taha</h4>
-                        <span class="doctor-specialty">ORL</span>
-                        <p class="doctor-bio">Spécialiste en oto-rhino-laryngologie</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Médecin 7 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Dr Karim Farhat" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Karim Farhat</h4>
-                        <span class="doctor-specialty">Radiologue</span>
-                        <p class="doctor-bio">Expert en imagerie médicale diagnostique</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Médecin 8 -->
-            <div class="col-lg-3 col-md-6">
-                <div class="doctor-card animate__animated">
-                    <div class="doctor-img-container">
-                        <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="Dr Rania El Sayed" class="doctor-img">
-                    </div>
-                    <div class="doctor-info">
-                        <h4>Dr Rania El Sayed</h4>
-                        <span class="doctor-specialty">Psychiatre</span>
-                        <p class="doctor-bio">Spécialiste en santé mentale et thérapies cognitives</p>
-                        <div class="doctor-social">
-                          
-                             
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+        <div class="doctor-card text-center p-0 bg-white shadow-sm h-100 rounded overflow-hidden">
+          <div class="overflow-hidden">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="doctor-img" alt="Dr Nadia Ben Salah">
+          </div>
+          <div class="p-4">
+            <h4 class="mb-2">Dr Nadia Ben Salah</h4>
+            <p class="text-primary mb-3">Pédiatre</p>
+            <p class="text-muted mb-4">Spécialiste de la santé infantile, diplômée en pédiatrie et nutrition infantile</p>
+            <div class="social-links">
+              <a href="#" class="text-secondary me-2"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="text-secondary"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp" data-wow-delay="0.4s">
+        <div class="doctor-card text-center p-0 bg-white shadow-sm h-100 rounded overflow-hidden">
+          <div class="overflow-hidden">
+            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="doctor-img" alt="Dr Youssef Mahdi">
+          </div>
+          <div class="p-4">
+            <h4 class="mb-2">Dr Youssef Mahdi</h4>
+            <p class="text-primary mb-3">Médecin Généraliste</p>
+            <p class="text-muted mb-4">Médecin de famille avec une approche holistique de la santé depuis 2008</p>
+            <div class="social-links">
+              <a href="#" class="text-secondary me-2"><i class="fab fa-linkedin"></i></a>
+              <a href="#" class="text-secondary"><i class="fas fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
+
 <!-- Rendez-vous Section -->
 <section id="appointment" class="py-5 section-bg">
   <div class="container py-5">
@@ -489,7 +409,7 @@
           <h5 class="mb-3">Contact direct</h5>
           <p class="mb-2"><i class="fas fa-phone-alt me-2 text-primary"></i> 01 23 45 67 89</p>
           <p class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> contact@medicabplus.fr</p>
-          <p><i class="fas fa-map-marker-alt me-2 text-primary"></i> GUELIZ,marrkech </p>
+          <p><i class="fas fa-map-marker-alt me-2 text-primary"></i> Av Allal Elfassi ,40000 Marrakech</p>
         </div>
       </div>
       <div class="col-lg-6 animate__animated animate__fadeInRight">
@@ -498,7 +418,7 @@
             <h4 class="mb-0">Formulaire de rendez-vous</h4>
           </div>
           <div class="p-4 p-lg-5">
-            <form method="post" action="book_appointment.php">
+            <form method="post" action="rdv.php" id="rdv">
               <div class="floating-label mb-4">
                 <input type="text" class="form-control" id="fullName" name="fullName" placeholder=" " required>
                 <label for="fullName">Nom complet</label>
@@ -517,7 +437,7 @@
                   <label for="rdv_date">Date</label>
                 </div>
                 <div class="col-md-6 floating-label">
-                  <select class="form-select" id="rdv_time" name="rdv_time" required>
+                  <select class="form-select" id="time" name="rdv_time" required>
                     <option value="" selected disabled></option>
                     <option value="09:00">09:00</option>
                     <option value="10:00">10:00</option>
@@ -562,7 +482,7 @@
             </div>
             <div>
               <h5>Adresse</h5>
-              <p class="mb-0">GUELIZ<br>MARRAKECH MAROC</p>
+              <p class="mb-0">Av Allal Elfassi<br>40000 Marrakech ,Maroc</p>
             </div>
           </div>
           <div class="d-flex mb-4">
@@ -571,7 +491,7 @@
             </div>
             <div>
               <h5>Téléphone</h5>
-              <p class="mb-0">06 23 45 67 89</p>
+              <p class="mb-0">01 23 45 67 89</p>
             </div>
           </div>
           <div class="d-flex mb-4">
@@ -593,8 +513,8 @@
             </div>
           </div>
           <div class="mt-4">
-            <iframe src="https://g.co/kgs/1Dz9UKn" 
-                    width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2666.598599336831!2d-8.005249925602406!3d31.65397214053138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafed003e1881bb%3A0x9f8fe2f4263aeb66!2sAllal%20Al%20Fassi!5e1!3m2!1sfr!2sma!4v1746818811192!5m2!1sfr!2sma" width="400" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  
           </div>
         </div>
       </div>
@@ -628,7 +548,64 @@
   </div>
 </section>
 
-
+<!-- Footer -->
+<footer class="text-center text-lg-start">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-lg-4 mb-4 mb-lg-0">
+        <h5 class="text-uppercase mb-4 d-flex align-items-center">
+          <i class="fas fa-heartbeat me-3 fs-3"></i> <span>MediCab+</span>
+        </h5>
+        <p class="mb-4">
+          Cabinet médical pluridisciplinaire offrant des soins de qualité dans un environnement moderne et chaleureux au cœur de Paris.
+        </p>
+        <div class="mt-4">
+          <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-icon me-2"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Services</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Consultation</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Cardiologie</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Pédiatrie</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Vaccination</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Bilans de santé</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+        <h5 class="text-uppercase mb-4">Liens utiles</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Mentions légales</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">CGU</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Politique de confidentialité</a></li>
+          <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
+          <li><a href="#" class="text-white text-decoration-none">Plan du site</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h5 class="text-uppercase mb-4">Newsletter</h5>
+        <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos actualités et conseils santé.</p>
+        <form class="mb-4">
+          <div class="input-group">
+            <input type="email" class="form-control" placeholder="Votre email" aria-label="Votre email">
+            <button class="btn btn-primary" type="button">S'abonner</button>
+          </div>
+        </form>
+        <div class="d-flex align-items-center">
+          <i class="fas fa-map-marker-alt me-3"></i>
+          <p class="mb-0">Av Allal Elfassi ,40000 Marrakech</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-4 border-top border-white border-opacity-10">
+    &copy; 2025 MediCab+ - Tous droits réservés
+  </div>
+</footer>
 
 <!-- Modals -->
 <!-- Modal Consultation Générale -->
@@ -775,208 +752,39 @@
     </div>
   </div>
 </div>
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="login.php" method="post">
-          <div class="mb-3">
-            <label for="loginEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="loginEmail" name="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="loginPassword" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="loginPassword" name="password" required>
-          </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe">
-            <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">Se connecter</button>
-        </form>
-        <div class="text-center mt-3">
-          <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal">Mot de passe oublié ?</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- Register Patient Modal -->
-<div class="modal fade" id="registerPatientModal" tabindex="-1" aria-labelledby="registerPatientModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="registerPatientModalLabel">Inscription Patient</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="register_patient.php" method="post">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="patientFirstName" class="form-label">Prénom</label>
-              <input type="text" class="form-control" id="patientFirstName" name="first_name" required>
-            </div>
-            <div class="col-md-6">
-              <label for="patientLastName" class="form-label">Nom</label>
-              <input type="text" class="form-control" id="patientLastName" name="last_name" required>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="patientEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="patientEmail" name="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="patientPhone" class="form-label">Téléphone</label>
-            <input type="tel" class="form-control" id="patientPhone" name="phone" required>
-          </div>
-          <div class="mb-3">
-            <label for="patientPassword" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="patientPassword" name="password" required>
-          </div>
-          <div class="mb-3">
-            <label for="patientConfirmPassword" class="form-label">Confirmer le mot de passe</label>
-            <input type="password" class="form-control" id="patientConfirmPassword" name="confirm_password" required>
-          </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="patientTerms" required>
-            <label class="form-check-label" for="patientTerms">J'accepte les <a href="#">conditions d'utilisation</a></label>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Register Doctor Modal -->
-<div class="modal fade" id="registerDoctorModal" tabindex="-1" aria-labelledby="registerDoctorModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="registerDoctorModalLabel">Inscription Médecin</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="register_doctor.php" method="post" enctype="multipart/form-data">
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="doctorFirstName" class="form-label">Prénom</label>
-              <input type="text" class="form-control" id="doctorFirstName" name="first_name" required>
-            </div>
-            <div class="col-md-6">
-              <label for="doctorLastName" class="form-label">Nom</label>
-              <input type="text" class="form-control" id="doctorLastName" name="last_name" required>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label for="doctorEmail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="doctorEmail" name="email" required>
-          </div>
-          <div class="mb-3">
-            <label for="doctorSpecialty" class="form-label">Spécialité</label>
-            <select class="form-select" id="doctorSpecialty" name="specialty" required>
-              <option value="">Choisir une spécialité</option>
-              <option value="Cardiologue">Cardiologue</option>
-              <option value="Pédiatre">Pédiatre</option>
-              <option value="Généraliste">Médecin Généraliste</option>
-              <option value="Dermatologue">Dermatologue</option>
-              <option value="ORL">ORL</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="doctorPhone" class="form-label">Téléphone</label>
-            <input type="tel" class="form-control" id="doctorPhone" name="phone" required>
-          </div>
-          <div class="mb-3">
-            <label for="doctorPassword" class="form-label">Mot de passe</label>
-            <input type="password" class="form-control" id="doctorPassword" name="password" required>
-          </div>
-          <div class="mb-3">
-            <label for="doctorConfirmPassword" class="form-label">Confirmer le mot de passe</label>
-            <input type="password" class="form-control" id="doctorConfirmPassword" name="confirm_password" required>
-          </div>
-          <div class="mb-3">
-            <label for="doctorDiploma" class="form-label">Diplôme (PDF)</label>
-            <input type="file" class="form-control" id="doctorDiploma" name="diploma" accept=".pdf" required>
-          </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="doctorTerms" required>
-            <label class="form-check-label" for="doctorTerms">J'accepte les <a href="#">conditions d'utilisation</a></label>
-          </div>
-          <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Footer -->
-<footer class="text-center text-lg-start">
-  <div class="container py-5">
-    <div class="row g-4">
-      <div class="col-lg-4 mb-4 mb-lg-0">
-        <h5 class="text-uppercase mb-4 d-flex align-items-center">
-          <i class="fas fa-heartbeat me-3 fs-3"></i> <span>MediCab+</span>
-        </h5>
-        <p class="mb-4">
-          Cabinet médical pluridisciplinaire offrant des soins de qualité dans un environnement moderne et chaleureux au cœur de Paris.
-        </p>
-        <div class="mt-4">
-          <a href="#" class="social-icon me-2"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-icon me-2"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="social-icon me-2"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase mb-4">Services</h5>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Consultation</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Cardiologie</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Pédiatrie</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Vaccination</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Bilans de santé</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-        <h5 class="text-uppercase mb-4">Liens utiles</h5>
-        <ul class="list-unstyled">
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Mentions légales</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">CGU</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">Politique de confidentialité</a></li>
-          <li class="mb-2"><a href="#" class="text-white text-decoration-none">FAQ</a></li>
-          <li><a href="#" class="text-white text-decoration-none">Plan du site</a></li>
-        </ul>
-      </div>
-      <div class="col-lg-4">
-        <h5 class="text-uppercase mb-4">Newsletter</h5>
-        <p class="mb-4">Abonnez-vous à notre newsletter pour recevoir nos actualités et conseils santé.</p>
-        <form class="mb-4">
-          <div class="input-group">
-            <input type="email" class="form-control" placeholder="Votre email" aria-label="Votre email">
-            <button class="btn btn-primary" type="button">S'abonner</button>
-          </div>
-        </form>
-        <div class="d-flex align-items-center">
-          <i class="fas fa-map-marker-alt me-3"></i>
-          <p class="mb-0">123 Rue de la Santé, 75015 Paris</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="text-center p-4 border-top border-white border-opacity-10">
-    &copy; 2025 MediCab+ - Tous droits réservés
-  </div>
-</footer>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="script.js"></script>
+<!-- MODAL LOGIN -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeModal('loginModal')" class="close">&times;</span>
+    <h2 class="mb-3">Connexion</h2>
+    <form method="post" action="login.php">
+<!-- In loginModal -->
+      <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>      <input type="password" name="password" class="form-control mb-2" placeholder="Mot de passe" required>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL SIGN UP -->
+<div id="signupModal" class="modal">
+  <div class="modal-content">
+    <span onclick="closeModal('signupModal')" class="close">&times;</span>
+    <h2 class="mb-3">Créer un compte</h2>
+    <form method="post" action="signup.php">
+      <input type="text" name="username" class="form-control mb-2" placeholder="Nom d'utilisateur" required>
+      <input type="email" name="email" class="form-control mb-2" placeholder="Email" required>
+      <input type="password" name="password" class="form-control mb-2" placeholder="Mot de passe" required>
+      <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+
+
 </body>
 </html>
