@@ -40,12 +40,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare("INSERT INTO rdv (patient_id, full_name, email, phone, rdv_date, rdv_time, doctor) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("issssss", $patient_id, $full_name, $email, $phone, $rdv_date, $rdv_time, $doctor);
 
-    if ($stmt->execute()) {
-        header("Location: login.php?success=rdv_created");
-    } else {
-        header("Location: mes_rdv.php?error=db_error");
-    }
+if ($stmt->execute()) {
+    echo "
+    <script>
+        if (confirm('Rendez-vous enregistré avec succès. Voulez-vous voir vos rendez-vous ?')) {
+            window.location.href = 'mes_rdv.php';
+        } else {
+               window.location.href = 'test.html';
+        }
+    </script>
+    ";
     exit;
+}
 }
 
 // Si accès direct au fichier
